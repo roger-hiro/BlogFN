@@ -1,8 +1,13 @@
 ## 前言
 
+**其实`Vue`官方从`2.6.X`版本开始就部分使用`Ts`重写了。**
+
+
 我个人对更严格类型限制没有积极的看法，毕竟各类转类型的骚写法写习惯了。
 
 然鹅最近的一个项目中，是`TypeScript`+ `Vue`，毛计喇，学之...…真香！
+
+**注意此篇标题的“前”，本文旨在讲`Ts`混入框架的使用，不讲`Class API`**
 
 ![img](http://ww2.sinaimg.cn/large/006tNc79gy1g3zr1ofq4lj30te0bsabh.jpg)
 
@@ -1187,6 +1192,16 @@ export default class Home extends Vue {
 [Python修饰符 （一）—— 函数修饰符 “@”](https://blog.csdn.net/972301/article/details/59537712)
 
 [Typescript 中的 interface 和 type到底有什么区别](https://juejin.im/post/5c2723635188252d1d34dc7d#heading-11)
+
+
+
+## 7. 总结
+
+![](https://user-gold-cdn.xitu.io/2019/6/14/16b53e37a96b8d86?w=1125&h=491&f=png&s=231570)
+而关于`Class API`撤销，其实还是挺舒服的。
+用`class` 来编写 `Vue`组件确实太奇怪了。
+(所以我这篇`Ts`入门压根没写`Class API`)
+![](https://user-gold-cdn.xitu.io/2019/6/14/16b53e5d5fd4daa2?w=296&h=215&f=png&s=94671)
 
 ## 作者掘金文章总集
 

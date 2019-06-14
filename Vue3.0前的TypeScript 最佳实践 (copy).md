@@ -267,25 +267,6 @@ function getLength(something: string | number): number {
 }
 ```
 
-####  安全导航操作符 ( ?. )和非空断言操作符（!.）
-
-**安全导航操作符 ( ?. ) 和空属性路径：**
-为了解决导航时变量值为null时，页面运行时出错的问题。
-
-```
-The null hero's name is {{nullHero?.name}}
-```
-
-**非空断言操作符：**
-
-能确定变量值一定不为空时使用。
-
-与安全导航操作符不同的是，非空断言操作符不会防止出现 null 或 undefined。 
-
-```
-let s = e!.name;  // 断言e是非空并访问name属性
-```
-
 
 
 ### 3.2  泛型：`Generics`
@@ -683,6 +664,34 @@ declare var d3: D3.Base;
    ```
 
    
+
+### 3.7 可选参数 ( ?: )和非空断言操作符（!.）
+
+**可选参数**
+```
+function buildName(firstName: string, lastName?: string) {
+    return firstName + ' ' + lastName
+}
+
+// 错误演示
+buildName("firstName", "lastName", "lastName")
+// 正确演示
+buildName("firstName")
+// 正确演示
+buildName("firstName", "lastName")
+```
+
+**非空断言操作符：**
+
+能确定变量值一定不为空时使用。
+
+与可选参数 不同的是，非空断言操作符不会防止出现 null 或 undefined。 
+
+```
+let s = e!.name;  // 断言e是非空并访问name属性
+```
+
+
 
 ## 4. `Vue`组件的`Ts`写法
 

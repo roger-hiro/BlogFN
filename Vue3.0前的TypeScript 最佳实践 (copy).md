@@ -965,7 +965,35 @@ declare module 'vue/types/vue' {
 
 
 ### 4.3 Axios 使用与封装
+`Axios`的封装千人千面
 
+如果只是想简单在Ts里体验使用`Axios`，可以安装`vue-axios`
+**简单使用`Axios`**
+```
+$ npm i axios vue-axios
+```
+`main.ts`添加：
+```
+import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios)
+```
+然后在组件内使用：
+```
+Vue.axios.get(api).then((response) => {
+  console.log(response.data)
+})
+
+this.axios.get(api).then((response) => {
+  console.log(response.data)
+})
+
+this.$http.get(api).then((response) => {
+  console.log(response.data)
+})
+```
 #### 1. 新建文件`request.ts`
 文件目录:
 

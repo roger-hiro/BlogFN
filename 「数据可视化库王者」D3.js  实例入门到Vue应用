@@ -1,0 +1,711 @@
+## 前言
+
+`D3`近年来一直是`JavaScript`最重要的数据可视化库之一，在创建者`Mike Bostock`的愿景下，开发仍然很强劲:
+
+* `D3`与众多其他库的区别在于无限定制的能力（直接操作`SVG`）。
+* 它的底层`API`提供对原生`SVG`元素的直接控制，但它也带来了高学习曲线的成本。
+* 我们将把`D3`和`Vue`结合在一起 - 使用`Vue`的动态数据绑定，清晰的语法和模块化结构，以在`D3`中发挥最佳性能。
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bc0af6a824ad42?w=1600&h=599&f=png&s=1216214)
+根据广泛定义，D3可拆分为以下几种分库：
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bc0b2c181e7aa6?w=1600&h=927&f=png&s=655692)
+
+1. 绝大部分的`D3`课程或书籍，都会着重讲解在其`DOM`操作功能上，但这明显与近几年来的web框架理念相违背。
+2. 用于数据可视化的`D3`，其核心在于使用绘图指令装饰数据，从源数据创建新的可绘制数据，生成`SVG`路径以及从数据和方法在`DOM`中创建数据可视化元素（如轴）的功能。
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bc0b98959c86fd?w=1420&h=694&f=png&s=150231)
+3. 有许多用于管理DOM的工具，所有这些工具都可以在`D3`中集成数据可视化功能。这也是`D3`能与`Vue`无缝结合的原因之一。
+
+于此，我们不需要从`D3 DOM`操作功能开始学起，直接通过实例来入门`D3`。
+
+
+## D3.js 渐进入门
+以下实例的模版均为以下形式：
+```
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <title>Learn D3.js</title>
+    </head>
+    <body>
+        <!--或其它标签-->
+        <h1>First heading</h1>
+        
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
+```
+### 1. 选择和操作
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bbdd1083d0fb3f?w=800&h=309&f=png&s=35568)
+
+你需要学习的第一件事是如何使用D3.js选择和操作DOM元素。该库在操作DOM方面实际上非常强大，因此理论上可以将其用作`jQuery`的替代品。**以下代码请逐行添加运行。**
+```
+// index.js
+d3.select();
+d3.selectAll();
+
+d3.select('h1').style('color', 'red')
+.attr('class', 'heading')
+.text('Updated h1 tag');
+
+d3.select('body').append('p').text('First Paragraph');
+d3.select('body').append('p').text('Second Paragraph');
+d3.select('body').append('p').text('Third Paragraph');
+
+d3.selectAll('p').style('')
+```
+
+### 2.数据加载和绑定
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bbdd71d67cdcc8?w=800&h=252&f=png&s=63916)
+当你要创建可视化时，了解如何加载数据以及将其绑定到DOM非常重要。所以在这个实例中，你将学到这两点。
+```
+let dataset = [1, 2, 3, 4, 5];
+
+d3.select('body')
+    .selectAll('p')
+    .data(dataset)
+    .enter()
+    .append('p') // appends paragraph for each data element
+    .text('D3 is awesome!!');
+    //.text(function(d) { return d; });
+```
+
+### 3.创建一个简单的柱状图
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bbdd995d6d6d72?w=800&h=424&f=png&s=21526)
+首先需要添加一个`svg`标签
+```
+<h1>Bar Chart using D3.js</h1>
+
+<svg class="bar-chart"></svg>
+```
+然后在`index.js`中添加（已添加关键注释）：
+```
+// 数据集
+let dataset = [80, 100, 56, 120, 180, 30, 40, 120, 160];
+// 定义svg图形宽高，以及柱状图间距
+let svgWidth = 500, svgHeight = 300, barPadding = 5;
+// 通过图形计算每个柱状宽度
+let barWidth = (svgWidth / dataset.length);
+
+// 绘制图形
+let svg = d3.select('svg')
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
+
+// rect，长方形
+// 文档：http://www.w3school.com.cn/svg/svg_rect.asp
+
+let barChart = svg.selectAll("rect")
+    .data(dataset) //绑定数组
+    .enter() // 指定选择集的enter部分
+    .append("rect") // 添加足够数量的矩形
+    .attr("y", d => svgHeight - d ) // d为数据集每一项的值, 取y坐标
+    .attr("height", d => d) // 设定高度
+    .attr("width", barWidth - barPadding) // 设定宽度
+    .attr("transform", (d, i) =>  {
+        let translate = [barWidth * i, 0]; 
+        return "translate("+ translate +")";
+    }); // 实际是计算每一项值的x坐标
+```
+### 4. 在图形上方显示数值
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bbdf49e35f44ab?w=800&h=463&f=png&s=33403)
+这时就需要在上述代码中创建`svg`的 `text`文本
+```
+let text = svg.selectAll("text")
+    .data(dataset)
+    .enter()
+    .append("text")
+    .text(d => d)
+    .attr("y", (d, i) => svgHeight - d - 2)
+    .attr("x", (d, i) =>  barWidth * i)
+    .attr("fill", "#A64C38");
+```
+过程比较简单，就是返回文本，计算x/y坐标，并填充颜色。
+
+### 5. `scales`: 比例尺函数
+`D3`中有个重要的概念就是比例尺。比例尺就是把一组输入域映射到输出域的函数。映射就是两个数据集之间元素相互对应的关系。比如输入是1，输出是100，输入是5，输出是10000，那么这其中的映射关系就是你所定义的比例尺。
+
+`D3`中有各种比例尺函数，有连续性的，有非连续性的，在本例子中，你将学到`d3.scaleLinear()` ，**线性比例尺**。
+#### 5.1 `d3.scaleLinear()`，线性比例尺
+使用`d3.scaleLinear()`创造一个线性比例尺，其中：
+
+* `domain()`是输入域
+* `range()`是输出域
+* 相当于将`domain`中的数据集映射到`range`的数据集中。
+
+```
+let scale = d3.scaleLinear().domain([1,5]).range([0,100])
+```
+映射关系：
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bbe01b3bbeed14?w=430&h=218&f=png&s=25886)
+
+值得注意的是，上述代码只是**定义了一个映射规则**，映射的输入值并不局限于`domain()`中的输入域。
+```
+scale(1) // 输出:0
+scale(4) // 输出:75
+scale(5) // 输出:100
+scale(-1) // 输出:-50
+scale(10) // 输出:225
+```
+于是我们来改造`3～4`的例子：
+```
+let dataset = [1,2,3,4,5];
+
+let svgWidth = 500, svgHeight = 300, barPadding = 5;
+let barWidth = (svgWidth / dataset.length);
+
+
+let svg = d3.select('svg')
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
+    
+let yScale = d3.scaleLinear()
+    .domain([0, d3.max(dataset)])
+    .range([0, svgHeight]);
+        
+let barChart = svg.selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("y", d => svgHeight - yScale(d))
+    .attr("height", d => yScale(d))
+    .attr("width", barWidth - barPadding)
+    .attr("transform", (d, i) => {
+        let translate = [barWidth * i, 0]; 
+        return "translate("+ translate +")";
+    });
+```
+然后就会得到以下图形：
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bbe0cfafd623f1?w=1716&h=970&f=png&s=110312)
+
+6. `Axes`：轴
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bbe1140bae0e50?w=800&h=426&f=png&s=27760)
+
+轴是任何图表的组成部分，本例子中将会用到上面讲到的比例尺函数。
+```
+let data= [80, 100, 56, 120, 180, 30, 40, 120, 160];
+
+let svgWidth = 500, svgHeight = 300;
+
+let svg = d3.select('svg')
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
+
+// 首先是拿最大值构建x轴坐标
+let xScale = d3.scaleLinear()
+    .domain([0, d3.max(data)])
+    .range([0, svgWidth]);
+         
+// 接下来是反转值，用作y轴坐标。
+let yScale = d3.scaleLinear()
+    .domain([0, d3.max(data)])
+    .range([svgHeight, 0]);
+
+// 横轴的API使用
+let x_axis = d3.axisBottom()
+    .scale(xScale);
+    
+// 纵轴的API使用
+let y_axis = d3.axisLeft()
+    .scale(yScale);
+    
+// 在svg中提供了如g元素这样的将多个元素组织在一起的元素。
+// 由g元素编组在一起的可以设置相同的颜色，可以进行坐标变换等，类似于Vue中的 <template>
+
+svg.append("g")
+    .attr("transform", "translate(50, 10)")
+    .call(y_axis);
+         
+let xAxisTranslate = svgHeight - 20;
+         
+svg.append("g")
+    .attr("transform", "translate(50, " + xAxisTranslate  +")")
+    .call(x_axis);
+```
+
+### 7. 创建简易的`SVG`元素
+
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bbe670887723fb?w=800&h=431&f=png&s=19438)
+在这里面，你会创建`<rect>`，`<circle>`和`<line>`元素
+```
+let svgWidth = 600, svgHeight = 500;
+let svg = d3.select("svg")
+    .attr("width", svgWidth)
+    .attr("height", svgHeight)
+    .attr("class", "svg-container")
+    
+let line = svg.append("line")
+    .attr("x1", 100)
+    .attr("x2", 500)
+    .attr("y1", 50)
+    .attr("y2", 50)
+    .attr("stroke", "red");
+    
+let rect = svg.append("rect")
+    .attr("x", 100)
+    .attr("y", 100)
+    .attr("width", 200)
+    .attr("height", 100)
+    .attr("fill", "#9B95FF");
+    
+let circle = svg.append("circle")
+    .attr("cx", 200)
+    .attr("cy", 300)
+    .attr("r", 80)
+    .attr("fill", "#7CE8D5");
+```
+
+### 8. 创建饼图
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bbe6adedceb7b6?w=800&h=419&f=png&s=48106)
+
+```
+let data = [
+    {"platform": "Android", "percentage": 40.11}, 
+    {"platform": "Windows", "percentage": 36.69},
+    {"platform": "iOS", "percentage": 13.06}
+];
+
+let svgWidth = 500, svgHeight = 300, radius =  Math.min(svgWidth, svgHeight) / 2;
+let svg = d3.select('svg')
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
+
+//Create group element to hold pie chart    
+let g = svg.append("g")
+    .attr("transform", "translate(" + radius + "," + radius + ")") ;
+
+// d3.scaleOrdinal() 序数比例尺
+// schemeCategory10, 颜色比例尺
+// D3提供了一些颜色比例尺，10就是10种颜色，20就是20种：
+let color = d3.scaleOrdinal(d3.schemeCategory10);
+
+let pie = d3.pie().value(d => d.percentage);
+
+let path = d3.arc()
+    .outerRadius(radius)
+    .innerRadius(0);
+ 
+let arc = g.selectAll("arc")
+    .data(pie(data))
+    .enter()
+    .append("g");
+
+arc.append("path")
+    .attr("d", path)
+    .attr("fill", d => color(d.data.percentage));
+        
+let label = d3.arc()
+    .outerRadius(radius)
+    .innerRadius(0);
+            
+arc.append("text")
+    .attr("transform",  d => `translate(${label.centroid(d)})`)
+    .attr("text-anchor", "middle")
+    .text(d => `${d.data.platform}:${d.data.percentage}%`);
+```
+### 9. 创建折线图
+
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bbe93ca34c3f76?w=1596&h=1056&f=png&s=103642)
+
+最后，你将学习如何创建折线图以显示近四个月的比特币价格。要获取数据，你将使用外部API。这个项目还将你在整个课程中学到的很多概念结合在一起，所以这是一个很好的可视化课程结束。
+```
+// 外部API,注意日期记得补零
+const api = 'https://api.coindesk.com/v1/bpi/historical/close.json?start=2019-03-31&end=2019-07-01';
+
+/**
+ * dom内容加载完毕时，从API中加载数据
+ */
+document.addEventListener("DOMContentLoaded", function(event) {
+fetch(api)
+    .then(response => response.json())
+    .then(data => {
+        let parsedData = parseData(data);
+        drawChart(parsedData);
+    })
+    .catch(err =>  console.log(err))
+});
+
+/**
+ * 将数据解析为键值对
+ */
+parseData = data =>{
+    let arr = [];
+    for (let i in data.bpi) {
+        arr.push({
+            date: new Date(i), //date
+            value: +data.bpi[i] //convert string to number
+        });
+    }
+    return arr;
+}
+
+/**
+ * 创建图表
+ */
+drawChart  = data => {
+let svgWidth = 600, svgHeight = 400;
+let margin = { top: 20, right: 20, bottom: 30, left: 50 };
+let width = svgWidth - margin.left - margin.right;
+let height = svgHeight - margin.top - margin.bottom;
+
+let svg = d3.select('svg')
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
+    
+let g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+let x = d3.scaleTime()
+    .rangeRound([0, width]);
+
+let y = d3.scaleLinear()
+    .rangeRound([height, 0]);
+
+let line = d3.line()
+    .x(d=> x(d.date))
+    .y(d=> y(d.value))
+    x.domain(d3.extent(data, function(d) { return d.date }));
+    y.domain(d3.extent(data, function(d) { return d.value }));
+
+g.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+    .select(".domain")
+    .remove();
+
+g.append("g")
+    .call(d3.axisLeft(y))
+    .append("text")
+    .attr("fill", "#000")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", "0.71em")
+    .attr("text-anchor", "end")
+    .text("Price ($)");
+
+g.append("path")
+    .datum(data)
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-linejoin", "round")
+    .attr("stroke-linecap", "round")
+    .attr("stroke-width", 1.5)
+    .attr("d", line);
+}
+
+```
+
+以上原实例均来自：[Learn D3 for free](https://scrimba.com/g/gd3js)。scrimba是一个非常神奇的网站。它是使用交互式编码截屏工具构建的。
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bbe9d20e4a1f60?w=1200&h=571&f=gif&s=17190364)
+所有的操作都是：
+
+**暂停截屏视频 → 编辑代码 → 运行它！ → 查看更改**
+
+非常值得安利一波。接下来进入第二部分：`Vue`中使用`D3.js`的正确姿势
+
+## 2. `Vue`中使用`D3.js`的正确姿势
+
+我们将使用`D3`和`Vue`构建一个基本的柱状图组件。网上有一堆例子，但我们将专注于写`Vue`，而不是滥用D3。
+
+### 1. 安装依赖
+
+首先，我们需要为项目安装依赖项。我们可以简单地安装和使用`D3`整库:
+```
+npm i d3
+```
+但我在前面讲到，实际上`D3`是几个分库的集合，考虑到项目的优化，我们只安装所需的模块。
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bc0c919db43e09?w=1400&h=1112&f=png&s=295408)
+
+使用`Vue Cli` 初始化项目即可。
+
+### 2. 创建柱状图
+
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bc0dcdb4efc03d?w=520&h=406&f=png&s=26455)
+
+
+### 3. 柱状图模块导入
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bc114fc7c3fad8?w=1400&h=1074&f=png&s=288441)
+
+
+### 4. 创建`svg`元素
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bc116a47029542?w=1400&h=792&f=png&s=193601)
+
+因`Vue`数据响应的特性，我们不需要用到`D3`操作`DOM`的那套链式创建。
+
+### 5. 数据与窗口大小响应
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bc11d104ea1ee2?w=1400&h=617&f=png&s=149971)
+在`mounted`钩子中，我们将为窗口调整大小事件添加一个监听器，它将触发绘制动画，并将`<svg>`大小设置为新窗口的比例。我们不会立即渲染，而是等待`300`毫秒，以确保完全调整窗口大小。
+
+以下是完整的`BarChart.vue`,请配合注释食用:
+```
+<template>
+  <div id="container" class="svg-container" align="center">
+    <h1>{{ title }}</h1>
+    <svg v-if="redrawToggle === true" :width="svgWidth" :height="svgHeight">
+      <g>
+        <rect
+          v-for="item in data"
+          class="bar-positive"
+          :key="item[xKey]"
+          :x="xScale(item[xKey])"
+          :y="yScale(0)"
+          :width="xScale.bandwidth()"
+          :height="0"
+        ></rect>
+      </g>
+    </svg>
+  </div>
+</template>
+
+<script>
+import { scaleLinear, scaleBand } from "d3-scale";
+import { max, min } from "d3-array";
+import { selectAll } from "d3-selection";
+import { transition } from "d3-transition";
+
+export default {
+  name: "BarChart",
+  props: {
+    title: String,
+    xKey: String,
+    yKey: String,
+    data: Array
+  },
+  mounted() {
+    this.svgWidth = document.getElementById("container").offsetWidth * 0.75;
+    this.AddResizeListener();
+    this.AnimateLoad();
+  },
+  data: () => ({
+    svgWidth: 0,
+    redrawToggle: true
+  }),
+  methods: {
+    // 绘制柱形
+    AnimateLoad() {
+      selectAll("rect")
+        .data(this.data)
+        .transition()
+        .delay((d, i) => {
+          return i * 150;
+        })
+        .duration(1000)
+        .attr("y", d => {
+          return this.yScale(d[this.yKey]);
+        })
+        .attr("height", d => {
+          return this.svgHeight - this.yScale(d[this.yKey]);
+        });
+    },
+    // 调整窗口大小后300毫秒重新绘制图表
+    // 即响应式绘制
+    AddResizeListener() {
+      window.addEventListener("resize", () => {
+        this.$data.redrawToggle = false;
+        setTimeout(() => {
+          this.$data.redrawToggle = true;
+          this.$data.svgWidth =
+            document.getElementById("container").offsetWidth * 0.75;
+          this.AnimateLoad();
+        }, 300);
+      });
+    }
+  },
+  computed: {
+    dataMax() {
+      return max(this.data, d => {
+        return d[this.yKey];
+      });
+    },
+    dataMin() {
+      return min(this.data, d => {
+        return d[this.yKey];
+      });
+    },
+    xScale() {
+      return scaleBand()
+        .rangeRound([0, this.svgWidth])
+        .padding(0.1)
+        .domain(
+          this.data.map(d => {
+            return d[this.xKey];
+          })
+        );
+    },
+    // 通过线性比例尺自动生成
+    yScale() {
+      return scaleLinear()
+        .rangeRound([this.svgHeight, 0])
+        .domain([this.dataMin > 0 ? 0 : this.dataMin, this.dataMax]);
+    },
+    svgHeight() {
+      return this.svgWidth / 1.61803398875; // 黄金比例
+    }
+  }
+};
+</script>
+
+<style scoped>
+.bar-positive {
+  fill: steelblue;
+  transition: r 0.2s ease-in-out;
+}
+
+.bar-positive:hover {
+  fill: brown;
+}
+
+.svg-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding-bottom: 1%;
+  vertical-align: top;
+  overflow: hidden;
+}
+</style>
+```
+我们将从父组件`App.vue`获取数据：
+```
+<template>
+  <div id="app">
+    <BarChart title="Bar Chart" xKey="name" yKey="amount" :data="barChartData"/>
+  </div>
+</template>
+
+<script>
+import BarChart from "./components/BarChart.vue";
+
+export default {
+  name: "App",
+  components: {
+    BarChart
+  },
+  data: () => ({
+    barChartData: [
+      {
+        name: "张三",
+        amount: 25
+      },
+      {
+        name: "李四",
+        amount: 40
+      },
+      {
+        name: "老王",
+        amount: 15
+      },
+      {
+        name: "老赖",
+        amount: 9
+      }
+    ]
+  })
+};
+</script>
+
+<style>
+#app {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #282f36;
+  margin-top: 30px;
+}
+</style>
+```
+这时候`yarn run serve`后将会看到：
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bc11283bcbd8f9?w=640&h=444&f=gif&s=11575822)
+
+好像还缺点显示数值，考虑到该图高度是根据比例尺生成，我们调整下y坐标：
+```
+yScale() {
+  return scaleLinear()
+    .rangeRound([this.svgHeight, 0])
+    .domain([this.dataMin > 0 ? 0 : this.dataMin + 2, this.dataMax + 2]);
+},
+```
+在`AnimateLoad()`末尾添加：
+```
+selectAll("text")
+  .data(this.data)
+  .enter()
+```
+
+最后在`<g>`元素中添加：
+```
+<text
+  v-for="item in data"
+  :key="item[xKey].amount"
+  :x="xScale(item[xKey]) + 30"
+  :y="yScale(item[yKey]) - 2"
+  fill="red"
+>{{ item[xKey]}} {{ item[yKey]}}
+</text>
+```
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bc110ac63f4f5a?w=1504&h=1078&f=png&s=106389)
+
+
+
+## 3. 参考文章
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bc1458c2dd17b3?w=958&h=482&f=gif&s=4353426)
+
+* [The Hitchhiker’s Guide to d3.js](https://medium.com/@enjalot/the-hitchhikers-guide-to-d3-js-a8552174733a)
+
+* [D3 is not a Data Visualization Library](https://medium.com/@Elijah_Meeks/d3-is-not-a-data-visualization-library-67ba549e8520)
+
+* [D3中常用的比例尺](https://segmentfault.com/a/1190000011006780)
+
+* [D3 vs G2 vs Echarts](https://www.jianshu.com/p/7792544e680c)
+
+* [Dynamic Data Visualizations With Vue.js and D3](https://medium.com/swlh/modular-data-visualizations-with-vue-js-and-d3-87b37392a589)
+
+## 4. 总结
+该库几乎凭 `Mike Bostock` 一人之力完成，且在学术界、专业团队中享有极大声誉。
+
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bc1302f13db0f2?w=1512&h=374&f=png&s=121429)
+
+* `D3`更接近底层，与 `g2`、`echarts` 不同，`d3` 能直接操作 `svg`，所以拥有极大的自由度，几乎可以实现任何 2d 的设计需求。
+* 正如其名 `Data Driven Documents`，其本质是将数据与 `DOM` 绑定，并将数据映射至 `DOM` 属性上。
+* `D3` 长于可视化，而不止于可视化，还提供了`数据处理`、`数据分析`、`DOM` 操作等诸多功能。
+* **如果有想深耕数据可视化方面的前端，`D3`不得不学。**
+
+![](https://user-gold-cdn.xitu.io/2019/7/5/16bc12d02e78215c?w=2212&h=450&f=png&s=1804286)
+
+**掌握 `D3` 后，限制作品水平的只会是想象力而不再是技术。**
+## 作者掘金文章总集
+
+**需要转载到公众号的喊我加下白名单就行了。**
+* [「真®全栈之路」Web前端开发的后端指南](https://juejin.im/post/5cc02aacf265da039e1ff3fa)
+* [「Vue实践」5分钟撸一个Vue CLI 插件](https://juejin.im/post/5cb59c4bf265da03a743e979)
+* [「Vue实践」武装你的前端项目](https://juejin.im/post/5cab64ce5188251b19486041)
+* [「中高级前端面试」JavaScript手写代码无敌秘籍](https://juejin.im/post/5c9c3989e51d454e3a3902b6)
+* [「从源码中学习」面试官都不知道的Vue题目答案](https://juejin.im/post/5c959f74f265da610c068fa8)
+* [「从源码中学习」Vue源码中的JS骚操作](https://juejin.im/post/5c73554cf265da2de33f2a32)
+* [「从源码中学习」彻底理解Vue选项Props](https://juejin.im/post/5c88e669f265da2d8f47792a)
+* [「Vue实践」项目升级vue-cli3的正确姿势](https://juejin.im/post/5c4a83e36fb9a049b13e91ba)
+* [为何你始终理解不了JavaScript作用域链？](https://juejin.im/editor/posts/5c8efeb1e51d45614372addd)
+### 公众号
+![](https://user-gold-cdn.xitu.io/2019/3/29/169c519daed09b39?w=370&h=124&f=png&s=31328)
+
+![](https://user-gold-cdn.xitu.io/2019/3/29/169c818165484bb8?w=258&h=258&f=jpeg&s=27123)

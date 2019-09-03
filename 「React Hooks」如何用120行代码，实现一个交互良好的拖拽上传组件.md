@@ -555,11 +555,8 @@ export default class App extends Component {
 
 ![](https://user-gold-cdn.xitu.io/2019/8/29/16cdb48f5335d894?w=240&h=240&f=png&s=29821)
 
-## ❤️ 看完三件事
+## ❤️ 前端劝退师公众号交流群
 
-如果你觉得这篇内容对你挺有启发，我想邀请你帮我三个小忙：
-
-v文章。
 * 添加微信：huab119，回复：加群。加入前端劝退师公众号交流群。
 
 ![](https://user-gold-cdn.xitu.io/2019/8/16/16c99f6a1eb7cd79?w=1080&h=546&f=png&s=336649)

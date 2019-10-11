@@ -1,9 +1,18 @@
+## 前言
+本文暂未涉及`Performance`面板的内容。
+后续会单独出一篇，以下是目录：
+1. 常用命令和调试
+2. 黑盒脚本：`Blackbox Script`
+3. 控制台内置指令
+4. 远程调试`WebView`
+
+
 ## 1. Chrome Devtools 的用处
 
-* 前端开发：开发预览、远程调试、性能调优、bug跟踪、断点调试等
+* 前端开发：开发预览、远程调试、性能调优、`bug`跟踪、断点调试等
 * 后端开发：网络抓包、开发调试Response
-* 测试：服务端API数据是否正确、审查页面元素样式及布局、页面加载性能分析、自动化测试
-* 其他：安装扩展插件，如AdBlock、Gliffy、Axure等
+* 测试：服务端`API`数据是否正确、审查页面元素样式及布局、页面加载性能分析、自动化测试
+* 其他：安装扩展插件，如`AdBlock、Gliffy、Axure`等
 
 ## 2. 菜单面板拆解
 
@@ -82,7 +91,7 @@
 
 
 * 创建一个文件夹以在本地添加替代内容；
-* 打开`Sources > Overrides > Enable  Overrides`，选择本地文件夹
+* 打开`Sources > Overrides > Enable local Overrides`，选择本地文件夹
 ![](https://user-gold-cdn.xitu.io/2019/10/11/16db67e0156cf5cc)
 * 打开`Elements`，编辑样式，自动生成本地文件。
 * 返回`Sources`，检查文件，编辑更改。
@@ -337,12 +346,47 @@ console.dir(document)
     ```
 2. 手机打开`usb`调试，插上电脑。
 3. 在`Chrome`地址栏输入：`Chrome://inspect`
-    ![](https://user-gold-cdn.xitu.io/2019/10/11/16db9e299a2f9a59?w=597&h=328&f=png&s=102122)
+
+![](https://user-gold-cdn.xitu.io/2019/10/11/16db9f2b540ab143?w=627&h=511&f=png&s=58609)
     正常的话在`App`中打开`WebView`时，`chrome`中会监听到并显示你的页面。
 4. 点击页面下的`inspect`，就可以实时看到手机上`WebView`页面的显示状态了。（第一次使用可能会白屏，这是因为需要去`https://chrome-devtools-frontend.appspot.com`那边下载文件）
-![](https://user-gold-cdn.xitu.io/2019/10/11/16db9e48e675bd77?w=1015&h=714&f=png&s=439182)
+![](https://user-gold-cdn.xitu.io/2019/10/11/16db9f0896eae1c8?w=1365&h=728&f=png&s=541868)
+
+除了`inspect`标签，还有 **`Focus tab`**:
+* 它会自动触发`Android`设备上的相同操作
 
 **其他应用里的`WebView`也可以，例如这是某个应用里的游戏，用的也是网页：**
 
-
 ![](https://user-gold-cdn.xitu.io/2019/10/11/16db9e59da8e4db9?w=540&h=960&f=png&s=128262)
+
+## 7.调试`Node.js`
+具体可以查看阿里云社区的这篇：
+> [Node.js应用程序故障排除手册-正确启用Chrome DevTools](https://www.alibabacloud.com/blog/node-js-application-troubleshooting-manual---correctly-enabling-chrome-devtools_594964)
+
+![](https://user-gold-cdn.xitu.io/2019/10/11/16dba541b281c499?w=911&h=461&f=png&s=64801)
+Ps: 属于我的知识盲区，就不搬运造次了。
+## 参考资料
+> 1. [Practical Chrome Devtools — Common commands & Debugging](https://medium.com/@willmendesneto/practical-chrome-devtools-common-commands-debugging-891636b5fbf1)
+> 2. [Mobile web specialist — Remote Debugging](https://medium.com/@ahmzyjazzy/mobile-web-specialist-remote-debugging-bf0d7b3b0dde)
+> 3. [Console Utilities API Reference](https://developers.google.com/web/tools/chrome-devtools/console/utilities)
+> 4. [Console API Reference](https://developers.google.com/web/tools/chrome-devtools/console/api?hl=zh-cn)
+
+## ❤️ 看完三件事
+如果你觉得这篇内容对你挺有启发，我想邀请你帮我三个小忙：
+
+1. 点赞，让更多的人也能看到这篇内容（收藏不点赞，都是耍流氓 -_-）
+2. 关注公众号「前端劝退师」，不定期分享原创知识。
+3. 也看看其它文章
+* [120行代码实现一个交互完整的拖拽上传组件](https://juejin.im/post/5d674313e51d4561c94b1000)
+* [160行代码实现动态炫酷的可视化图表 - 排行榜](https://juejin.im/post/5d565015f265da03eb13c575)
+* [「数据可视化库王者」D3.js 极速上手到Vue应用](https://juejin.im/post/5d1e074af265da1bca51f8ec)
+* [「真®全栈之路」Web前端开发的后端指南](https://juejin.im/post/5cc02aacf265da039e1ff3fa)
+* [「Vue实践」5分钟撸一个Vue CLI 插件](https://juejin.im/post/5cb59c4bf265da03a743e979)
+* [「Vue实践」武装你的前端项目](https://juejin.im/post/5cab64ce5188251b19486041)
+* [「中高级前端面试」JavaScript手写代码无敌秘籍](https://juejin.im/post/5c9c3989e51d454e3a3902b6)
+* [「从源码中学习」面试官都不知道的Vue题目答案](https://juejin.im/post/5c959f74f265da610c068fa8)
+* [「从源码中学习」Vue源码中的JS骚操作](https://juejin.im/post/5c73554cf265da2de33f2a32)
+* [「Vue实践」项目升级vue-cli3的正确姿势](https://juejin.im/post/5c4a83e36fb9a049b13e91ba)
+* [为何你始终理解不了JavaScript作用域链？](https://juejin.im/editor/posts/5c8efeb1e51d45614372addd)
+
+![](https://user-gold-cdn.xitu.io/2019/8/5/16c5faffbefaea2e?w=2006&h=1014&f=png&s=672314)

@@ -17,9 +17,7 @@
 | 用途 | 观察一个元素是否在视窗可见                                   | 观察DOM中的变化                                              | 观察视口大小的变化                         | 监测性能度量事件                                             |
 | 方法 | observe() <br>disconnect() <br> takeRecords()                | observe() <br>disconnect() <br>takeRecords() <br>unobserve() | observe() <br>disconnect() <br>unobserve() | observe() <br>disconnect() <br>takeRecords()                 |
 | 取代 | Dom Mutation events                                          | getBoundingClientRect() 返回元素的大小及其相对于可视窗口的位置  <br> <br> Scroll 和 Resize 事件 | Resize 事件                                | Performance 接口                                             |
-| 用途 | 1. 无限滚动 <br>2. 图片懒加载<br> 3. 检测是否查看了广告（兴趣追踪）<br> 4. 仅在可视区域渲染动画（性能优化 | 1. 更高性能的数据绑定及响应。<br> 3. 实现视觉差滚动  <br> 4. 图片预加载 | 1. 更智能的响应式布局（取代@media）        | 1. 更细颗粒的性能监控 <br>2. 分析性能对业务的影响（交互快/慢是否会影响销量） |
-
-
+| 用途 | 1. 无限滚动 <br>2. 图片懒加载<br> 3. 兴趣埋点 <br> 4. 控制动画/视频执行（性能优化） | 1. 更高性能的数据绑定及响应<br> 2. 实现视觉差滚动  <br> 3. 图片预加载 <br> 4. 实现富文本编辑器 | 1. 更智能的响应式布局（取代@media） <br>2. 响应式组件       | 1. 更细颗粒的性能监控 <br>2. 分析性能对业务的影响（交互快/慢是否会影响销量） |
 ## 1. `IntersectionObserver`：交叉观察者
 
 > `IntersectionObserver`接口，提供了一种异步观察目标元素与其祖先元素或顶级文档视窗(`viewport`)交叉状态的方法，祖先元素与视窗(`viewport)`被称为根(`root`)
@@ -277,16 +275,16 @@ function callback (mutations, observer) {
 其中每个`mutation`都对应一个`MutationRecord`对象，记录着`DOM`每次发生变化的变动记录
 
 `MutationRecord`对象包含了DOM的相关信息，有如下属性：
-| 属性              | 意义                                                         |
-| ----------------- | ------------------------------------------------------------ |
-| `type`            | 观察的变动类型（`attribute`、`characterData`或者`childList`） |
-| `target`          | 发生变动的`DOM`节点                                          |
-| `addedNodes`      | 新增的`DOM`节点                                              |
-| `removedNodes`    | 删除的`DOM`节点                                              |
-| `previousSibling` | 前一个同级节点，如果没有则返回`null`                         |
-| `nextSibling`     | 下一个同级节点，如果没有则返回`null`                         |
-| `attributeName`   | 发生变动的属性。如果设置了`attributeFilter`，则只返回预先指定的属性 |
-| `oldValue`        | 变动前的值。这个属性只对`attribute`和`characterData`变动有效，如果发生`childList`变动，则返回`null` |
+| 属性 | 意义 |
+| ---- | ---- |
+| `type`| 观察的变动类型（`attribute`、`characterData`或者`childList`）| 
+|  `target`| 发生变动的`DOM`节点 | 
+|  `addedNodes`| 新增的`DOM`节点 | 
+|  `removedNodes`| 删除的`DOM`节点 | 
+|  `previousSibling`| 前一个同级节点，如果没有则返回`null` | 
+|  `nextSibling`| 下一个同级节点，如果没有则返回`null` | 
+|  `attributeName`| 发生变动的属性。如果设置了`attributeFilter`，则只返回预先指定的属性 | 
+| `oldValue`| 变动前的值。这个属性只对`attribute`和`characterData`变动有效，如果发生`childList`变动，则返回`null`| 
 
 
 #### 3. 定义要观察的目标对象
@@ -440,16 +438,16 @@ const callback = entries => {
 ![](https://user-gold-cdn.xitu.io/2019/10/23/16df8340db8bb93f?w=334&h=228&f=png&s=26592)
 
 `contentRect`都是一些位置信息：
-| 属性     | 作用                                        |
-| -------- | ------------------------------------------- |
-| `bottom` | `top + height`的值                          |
-| `height` | 元素本身的高度，不包含`padding`，`border`值 |
-| `left`   | `padding-left`的值                          |
-| `right`  | `left + width`的值                          |
-| `top`    | `padidng-top`的值                           |
-| `width`  | 元素本身的宽度，不包含`padding`，`border`值 |
-| `x`      | 大小与`top`相同                             |
-| `y`      | 大小与`left`相同                            |
+| 属性 | 作用 |
+| ---- | ---- |
+|  `bottom`|  `top + height`的值 | 
+|  `height`| 元素本身的高度，不包含`padding`，`border`值 | 
+|  `left`| `padding-left`的值 | 
+|  `right`| `left + width`的值 | 
+|  `top`| `padidng-top`的值 | 
+| `width`| 元素本身的宽度，不包含`padding`，`border`值 | 
+|  `x`| 大小与`top`相同 | 
+|  `y`| 大小与`left`相同 | 
 
 
 #### 3. 定义要观察的目标对象
@@ -656,11 +654,11 @@ const callback = (list, observer) => {
 其中每一个`list`都是一个完整的`PerformanceObserverEntryList`对象：
 ![](https://user-gold-cdn.xitu.io/2019/10/23/16df9412061956d0?w=1130&h=310&f=png&s=93030)
 包含三个方法`getEntries`、`getEntriesByType`、`getEntriesByName`：
-| 方法               | 作用                                                         |
-| ------------------ | ------------------------------------------------------------ |
-| getEntries()       | 返回一个列表，该列表包含一些用于承载各种性能数据的对象，不做任何过滤 |
-| getEntriesByType() | 返回一个列表，该列表包含一些用于承载各种性能数据的对象，按类型过滤 |
-| getEntriesByName() | 返回一个列表，，该列表包含一些用于承载各种性能数据的对象，按名称过滤 |
+| 方法 | 作用   |
+| ----- | --------- |
+| getEntries()	| 返回一个列表，该列表包含一些用于承载各种性能数据的对象，不做任何过滤 |
+| getEntriesByType() | 	返回一个列表，该列表包含一些用于承载各种性能数据的对象，按类型过滤 |
+| getEntriesByName() |	返回一个列表，，该列表包含一些用于承载各种性能数据的对象，按名称过滤 |
 #### 3. 定义要观察的目标对象
 ```
 observer.observe({entryTypes: ["entryTypes"]});
@@ -748,7 +746,7 @@ let resources = {
 > * [Different Types Of Observers Supported By Modern Browsers](https://www.zeolearn.com/magazine/different-types-of-observers-supported-by-modern-browsers)
 > * [THE RESIZE OBSERVER EXPLAINED](https://pawelgrzybek.com/the-resize-observer-explained/)
 > * [A Look at the Resize Observer JavaScript API](https://alligator.io/js/resize-observer/)
-> 这四个观察者，都非常适合集成到监控系统。
+这四个观察者，都非常适合集成到监控系统。
 
 且都有对应的`Polyfills`版实现。
 

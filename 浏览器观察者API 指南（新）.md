@@ -10,7 +10,7 @@
 * `Mutation Observer`，变动观察者。
 * `Resize Observer`，视图观察者。
 * `Performance Observer`，性能观察者
-![](https://user-gold-cdn.xitu.io/2019/10/24/16df977e0b2680a0?w=300&h=300&f=png&s=154461)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqnre59qj308c08ctcm.jpg)
 
 |      | IntersectionObserver                                         | MutationObserver                                             | ResizeObserver                             | PerformanceObserver                                          |
 | ---- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------ | ------------------------------------------------------------ |
@@ -26,7 +26,7 @@
 
 想要计算Web页面的元素的位置，非常依赖于`DOM`状态的显式查询。但这些查询是同步的，会导致昂贵的样式计算开销（重绘和回流），且不停轮询会导致大量的性能浪费。
 
-![](https://user-gold-cdn.xitu.io/2019/10/22/16df34ffa206ff4f?w=710&h=379&f=png&s=15142)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqo71evij30jq0ajq32.jpg)
 于是便发展了以下的几种方案：
 
 * 构建DOM和数据的自定义预加载和延迟加载。
@@ -99,7 +99,7 @@ function handler (entries, observer) {
 * target。
 
 
-![](https://user-gold-cdn.xitu.io/2019/10/22/16df3f6a6b04daeb?w=886&h=876&f=png&s=86284)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqodmeh4j30om0oc76c.jpg)
 
 
 #### 3. **定义要观察的目标对象**
@@ -208,7 +208,7 @@ observer.observe(video);
 效果：
 
 
-![](https://user-gold-cdn.xitu.io/2019/10/23/16df6bce3adeb937?w=504&h=721&f=gif&s=520369)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqohiq8sg30e00k14cc.gif)
 
 ## 2. `Mutation Observer`：变动观察者
 
@@ -216,8 +216,9 @@ observer.observe(video);
 
 ### 1. 出现的意义
 
-![](https://user-gold-cdn.xitu.io/2019/10/23/16df775ba854199d?w=800&h=239&f=png&s=43279)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqojp68hj30m806n756.jpg)
 归根究底，是`MutationEvents`的功能不尽人意：
+
 1. 在`MDN`中也写到了，是被`DOM Event`承认在API上有缺陷，反对使用。
 2. 核心缺陷是：性能问题和跨浏览器支持。
 3. 为`DOM`添加 `mutation` 监听器极度降低进一步修改`DOM`文档的性能（慢1.5 - 7倍），此外, 移除监听器不会逆转的损害。
@@ -277,14 +278,14 @@ function callback (mutations, observer) {
 `MutationRecord`对象包含了DOM的相关信息，有如下属性：
 | 属性 | 意义 |
 | ---- | ---- |
-| `type`| 观察的变动类型（`attribute`、`characterData`或者`childList`）| 
-|  `target`| 发生变动的`DOM`节点 | 
-|  `addedNodes`| 新增的`DOM`节点 | 
-|  `removedNodes`| 删除的`DOM`节点 | 
-|  `previousSibling`| 前一个同级节点，如果没有则返回`null` | 
-|  `nextSibling`| 下一个同级节点，如果没有则返回`null` | 
-|  `attributeName`| 发生变动的属性。如果设置了`attributeFilter`，则只返回预先指定的属性 | 
-| `oldValue`| 变动前的值。这个属性只对`attribute`和`characterData`变动有效，如果发生`childList`变动，则返回`null`| 
+| `type`| 观察的变动类型（`attribute`、`characterData`或者`childList`）|
+|  `target`| 发生变动的`DOM`节点 |
+|  `addedNodes`| 新增的`DOM`节点 |
+|  `removedNodes`| 删除的`DOM`节点 |
+|  `previousSibling`| 前一个同级节点，如果没有则返回`null` |
+|  `nextSibling`| 下一个同级节点，如果没有则返回`null` |
+|  `attributeName`| 发生变动的属性。如果设置了`attributeFilter`，则只返回预先指定的属性 |
+| `oldValue`| 变动前的值。这个属性只对`attribute`和`characterData`变动有效，如果发生`childList`变动，则返回`null`|
 
 
 #### 3. 定义要观察的目标对象
@@ -349,7 +350,7 @@ observer.observe(target, {
 有个`Vue`的小型插件就是这么实现的：
 > [来自：《vue-hashtag-textarea》](https://github.com/mitsuyacider/vue-hashtag-textarea)
 
-![](https://user-gold-cdn.xitu.io/2019/10/23/16df7e875c46f836?w=1718&h=962&f=gif&s=411083)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqopfe98g31bq0qqdqp.gif)
 
 
 ### 5. 例子2: 色块小游戏脚本
@@ -357,12 +358,12 @@ observer.observe(target, {
 这个实现也是秀得飞起：
 > [Hacking the color picker game — MutationObserver](https://benhuang.info/2019/02/20/hacking-the-color-picker-game-mutationobserver/)
 
-![](https://user-gold-cdn.xitu.io/2019/10/23/16df7f27f7224655?w=1024&h=508&f=png&s=90098)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqos265dj30sg0e4mxq.jpg)
 
 游戏的逻辑很简单，当中间的色块颜色改变时，在时间限制内于底下的选项选择跟它颜色一样的选项就得分。难的点在于越后面的关卡选项越多，而且选项颜色也越相近，例如：
 
 
-![](https://user-gold-cdn.xitu.io/2019/10/23/16df7f323c1b016c?w=1024&h=504&f=png&s=108051)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqouxwp6j30sg0e0go9.jpg)
 
 其实原理非常简单，就是观察色块的`backgroundColor`（属性变化`attributes`)，然后触发点击事件`e.click()`。
 ```
@@ -385,7 +386,7 @@ var observer = new MutationObserver(callback);
 observer.observe(targetNode, config);
 ```
 
-![](https://user-gold-cdn.xitu.io/2019/10/23/16df7f942b6c5432?w=1024&h=769&f=png&s=249432)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqowf3ygj30sg0ldjxv.jpg)
 
 ## 3. `ResizeObserver`，视图观察者
 `ResizeObserver API`是一个新的`JavaScript API`，与`IntersectionObserver API`非常相似，它们都允许我们去监听某个元素的变化。
@@ -403,7 +404,7 @@ observer.observe(targetNode, config);
 
 比如说，你要调整一个元素的大小，那就需要在 `resize` 的回调函数 `callback()` 中调用 `getBoundingClientRect` 或 `getComputerStyle`。不过你要是不小心处理所有的读和写操作，就会导致布局混乱。比如下面这个小示例：
 
-![](https://user-gold-cdn.xitu.io/2019/10/23/16df805c03bd6059?w=960&h=540&f=gif&s=489696)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqozf5q5g30qo0f07ha.gif)
 
 ### 2. `ResizeObserver`的优势
 
@@ -440,14 +441,14 @@ const callback = entries => {
 `contentRect`都是一些位置信息：
 | 属性 | 作用 |
 | ---- | ---- |
-|  `bottom`|  `top + height`的值 | 
-|  `height`| 元素本身的高度，不包含`padding`，`border`值 | 
-|  `left`| `padding-left`的值 | 
-|  `right`| `left + width`的值 | 
-|  `top`| `padidng-top`的值 | 
-| `width`| 元素本身的宽度，不包含`padding`，`border`值 | 
-|  `x`| 大小与`top`相同 | 
-|  `y`| 大小与`left`相同 | 
+|  `bottom`|  `top + height`的值 |
+|  `height`| 元素本身的高度，不包含`padding`，`border`值 |
+|  `left`| `padding-left`的值 |
+|  `right`| `left + width`的值 |
+|  `top`| `padidng-top`的值 |
+| `width`| 元素本身的宽度，不包含`padding`，`border`值 |
+|  `x`| 大小与`top`相同 |
+|  `y`| 大小与`left`相同 |
 
 
 #### 3. 定义要观察的目标对象
@@ -456,7 +457,7 @@ const callback = entries => {
 observer.observe(document.body)
 ```
 
-![](https://user-gold-cdn.xitu.io/2019/10/23/16df84167c1a9737?w=858&h=323&f=gif&s=1081983)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqp3amfhg30nu08z1kx.gif)
 
 `unobserve`方法：取消单节点观察
 ```
@@ -540,11 +541,11 @@ boxes.forEach(box => {
 ### 5. 例子2：响应式`Vue`组件
 
 
-![](https://user-gold-cdn.xitu.io/2019/10/23/16df85acd889db3e?w=1360&h=504&f=png&s=111457)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqp67achj311s0e0tbg.jpg)
 
 * 假设你要创建一个postItem组件，在大屏上是这样的显示效果
 
-![](https://user-gold-cdn.xitu.io/2019/10/23/16df8639cc511681?w=800&h=512&f=png&s=200064)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqp813yrj30m80e8dkz.jpg)
 * 在手机上需要这样的效果：
 ![](https://user-gold-cdn.xitu.io/2019/10/23/16df8640f1cc6ade?w=1078&h=1602&f=png&s=914860)
 
@@ -564,7 +565,7 @@ boxes.forEach(box => {
 
 * 但这就很容易出现 当你在超过预期的屏幕（过大）查看页面时，会出现以下的布局：
 
-![](https://user-gold-cdn.xitu.io/2019/10/23/16df85d633a4da85?w=2524&h=1596&f=png&s=1038062)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqpiri1rj31bg0u0qda.jpg)
 
 **`@media`查询的最大问题是：**
 
@@ -573,15 +574,14 @@ boxes.forEach(box => {
 
 以下是指令版实现：
 
-
-![](https://user-gold-cdn.xitu.io/2019/10/23/16df87b077e12408?w=762&h=624&f=png&s=104919)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqpllongj30l60hcgo6.jpg)
 使用：
 
-![](https://user-gold-cdn.xitu.io/2019/10/23/16df8785890f52e3?w=762&h=437&f=png&s=69839)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqpngm9cj30l60c575w.jpg)
 
 效果：
 
-![](https://user-gold-cdn.xitu.io/2019/10/23/16df86e5671e9e59?w=2514&h=1600&f=png&s=1773292)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqpql0wcj31b50u0npd.jpg)
 
 这是`vue-responsive-components`库的具体实现代码，还有组件形式的实现，感兴趣的可以去看看。
 
@@ -606,12 +606,12 @@ boxes.forEach(box => {
 
 * `Performance API` 是大家熟悉的一个接口，他记录着几种性能指数的庞大对象集合。
 
-![](https://user-gold-cdn.xitu.io/2019/10/23/16df910b6d854744?w=1146&h=438&f=png&s=285484)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqq676vyj30vu0c6qae.jpg)
 
 1. 若想获得某项页面加载性能记录，就需要调用`performance.getEntries`或者`performance.getEntriesByName`来获得。
 2. 而获得执行效率，也只能通过`performance.now`来计算。
 
-![](https://user-gold-cdn.xitu.io/2019/10/23/16df918d6a33e2b9?w=912&h=555&f=png&s=214147)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqq7fhwjj30pc0ff441.jpg)
 
 为了解决上述的问题，在`Performance Timeline Level 2`中，除了扩展了`Performance`的基本定义以外，还增加了`PerformanceObserver`接口。
 
@@ -654,6 +654,7 @@ const callback = (list, observer) => {
 其中每一个`list`都是一个完整的`PerformanceObserverEntryList`对象：
 ![](https://user-gold-cdn.xitu.io/2019/10/23/16df9412061956d0?w=1130&h=310&f=png&s=93030)
 包含三个方法`getEntries`、`getEntriesByType`、`getEntriesByName`：
+
 | 方法 | 作用   |
 | ----- | --------- |
 | getEntries()	| 返回一个列表，该列表包含一些用于承载各种性能数据的对象，不做任何过滤 |
@@ -752,7 +753,7 @@ let resources = {
 
 网上的总结和文档都深浅不一，如果哪里有错误，欢迎指正。
 
-![](https://user-gold-cdn.xitu.io/2019/10/24/16df9766165811f9?w=198&h=189&f=png&s=34671)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8dqqe4h5ij305i059t9d.jpg)
 
 ## ❤️ 看完三件事
 如果你觉得这篇内容对你挺有启发，我想邀请你帮我三个小忙：

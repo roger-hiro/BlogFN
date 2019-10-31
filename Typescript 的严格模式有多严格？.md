@@ -4,9 +4,13 @@
 
 至今，前端er们基本都默认开启严格模式敲代码。
 
+
+
 那么，你知道`Typescript` 其实也有属于自己的严格模式吗？
 
 ## 1. `Typescript`严格模式规则
+
+![“use strict Typescript”的图片搜索结果](https://tva1.sinaimg.cn/large/006y8mN6gy1g8hm6u1ch8j315o0m8761.jpg)
 
 当`Typescript`严格模式设置为`on`时，它将使用` strict`族下的严格类型规则对项目中的所有文件进行代码验证。规则是：
 

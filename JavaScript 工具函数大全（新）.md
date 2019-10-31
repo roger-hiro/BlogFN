@@ -18,6 +18,7 @@
 然后将所有代码段都看了遍，筛选了以下一百多段代码片段，并加入了部分自己的理解。
 ![](https://user-gold-cdn.xitu.io/2019/10/14/16dca07a7ee36b7b?w=240&h=175&f=png&s=37510)
 另外，**本文工具函数的命名非常值得借鉴。**
+
 ## 1. 第一部分：数组
 ### 1. `all`：布尔全等判断
 ```
@@ -539,7 +540,7 @@ luhnCheck(123456789); // false
 
 当然，还是库比较香: **bankcardinfo**
 
-![](https://user-gold-cdn.xitu.io/2019/10/14/16dc99df28f517a0?w=998&h=568&f=png&s=187504)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8hd1k9rh4j30rq0fs43b.jpg)
 
 ### 6. `splitLines`：将多行字符串拆分为行数组。
 使用`String.prototype.split()`和正则表达式匹配换行符并创建一个数组。
@@ -904,7 +905,7 @@ const escapeHTML = str =>
 escapeHTML('<a href="#">Me & you</a>'); // '&lt;a href=&quot;#&quot;&gt;Me &amp; you&lt;/a&gt;'
 ```
 
-![](https://user-gold-cdn.xitu.io/2019/10/15/16dcb0e162a2c934?w=295&h=355&f=png&s=136719)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8hd1nbi21j308709vgp1.jpg)
 ## ❤️ 看完三件事
 如果你觉得这篇内容对你挺有启发，我想邀请你帮我三个小忙：
 
@@ -912,4 +913,4 @@ escapeHTML('<a href="#">Me & you</a>'); // '&lt;a href=&quot;#&quot;&gt;Me &amp;
 2. 关注公众号「前端劝退师」，不定期分享原创知识。
 3. 也看看其它文章
 
-![](https://user-gold-cdn.xitu.io/2019/8/5/16c5faffbefaea2e?w=2006&h=1014&f=png&s=672314)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g8hd1p0di9j31jq0s6k9c.jpg)

@@ -33,7 +33,6 @@ $ grep "string" [选项] file
     $ grep -c "react" index.js
     ```
     
-
 ![](https://user-gold-cdn.xitu.io/2019/11/18/16e7ed01aa5f82d8?w=782&h=190&f=png&s=48454)
 
 更多的选项可以查看下图：
@@ -71,15 +70,14 @@ cat主要有三大功能：
 1. 一次显示整个文件。
   ```
  $ cat filename
-  ```
  ```
 2. 从键盘创建一个文件。
- ```
+  ```
   $ cat > filename
   ```
   **只能创建新文件,不能编辑已有文件。**
 3. 将几个文件合并为一个文件。
-  ```
+   ```
    $cat file1 file2 > file
    ```
    
@@ -88,7 +86,7 @@ cat主要有三大功能：
 
 ## 5. `echo`：字符串的输出
 
-   ```
+```
 $ echo "some text"
 ```
 
@@ -153,7 +151,7 @@ $ tail [选项] somefile
 几个常用的参数:
 
 * `-f`，循环读取。
-```
+  ```
   tail -f notes.log
   ```
   此命令显示 `notes.log` 文件的最后 10 行。当将某些行添加至 `notes.log` 文件时，`tail` 命令会继续显示这些行。 显示一直继续，直到您按下（`Ctrl-C`）组合键停止显示。
@@ -163,13 +161,13 @@ $ tail [选项] somefile
   ```
   显示文件 `notes.log` 的内容，从第 20 行至文件末尾。
 * `-c `，最后xx行。
-  ```
+   ```
    tail -c 10 notes.log
    ```
    显示文件 `notes.log`的最后 10 个字符:
    
 `tail`命令在查看崩溃报告或以前的历史记录日志时很有用:
-   ```
+```
 # tail /var/log/messages
 Mar 20 12:42:22 hameda1d1c dhclient[4334]: DHCPREQUEST on eth0 to 255.255.255.255 port 67 (xid=0x280436dd)
 Mar 20 12:42:24 hameda1d1c avahi-daemon[2027]: Registering new address record for fe80::4639:c4ff:fe53:4908 on eth0.*.
@@ -237,16 +235,16 @@ $ wget someurl
 
 常在写文档时需要列一下文件目录结构，这个时候`tree`命令就能帮个忙了。某些`Linux`、`macOS`上没有`tree`命令，需要执行安装：
 1. 先确保安装了`Homebrew`，若没有则执行：
-```
+   ```
    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
    ```
 2. 安装`tree`命令
-   ```
+  ```
   brew install tree
   ```
 
 效果：
-  ```
+```
 (base) xxx$ tree
 .
 ├── djangoStudy
@@ -320,31 +318,3 @@ $ echo "Hello World" | cat > hello.txt
 也可以来我的`GitHub`博客里拿所有文章的源文件：
 
 **前端劝退指南**：https://github.com/roger-hiro/BlogFN
-```
-
-```
-
-## 后记 & 引用
-
-> * [Here Are 11 Console Commands Every Developer Should Know](https://medium.com/better-programming/here-are-11-console-commands-every-developer-should-know-54e348ef22fa)
-> * [Linux管道命令（pipe）](https://www.jianshu.com/p/9c0c2b57cb73)
-> * [MacOS上使用tree命令](https://www.jianshu.com/p/f540e8b6e53f)
-附赠一张强大无比的`Linux`命令表
-
-![](https://user-gold-cdn.xitu.io/2019/11/19/16e829fca12cbc07?w=1680&h=2980&f=png&s=913641)
-## ❤️ 看完三件事
-如果你觉得这篇内容对你挺有启发，我想邀请你帮我三个小忙：
-
-1. 点赞，让更多的人也能看到这篇内容（收藏不点赞，都是耍流氓 -_-）
-2. 关注公众号「前端劝退师」，不定期分享原创知识。
-3. 也看看其它文章
-* [Chrome Devtools 高级调试指南（新）](https://juejin.im/post/5d9eea84e51d4577eb5d8510)
-* [JavaScript 工具函数大全（新）](https://juejin.im/post/5da1a04ae51d45783d6122bf)
-* [「React Hooks」120行代码实现一个交互完整的拖拽上传组件](https://juejin.im/post/5d674313e51d4561c94b1000)
-* [「React Hooks」160行代码实现动态炫酷的可视化图表 - 排行榜](https://juejin.im/post/5d565015f265da03eb13c575)
-![](https://user-gold-cdn.xitu.io/2019/8/5/16c5faffbefaea2e?w=2006&h=1014&f=png&s=672314)
-
-也可以来我的`GitHub`博客里拿所有文章的源文件：
-
-**前端劝退指南**：https://github.com/roger-hiro/BlogFN
-```

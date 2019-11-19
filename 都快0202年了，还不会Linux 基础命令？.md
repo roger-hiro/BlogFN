@@ -2,7 +2,7 @@
 程序员：“我要跑路了，告诉我命令行是“`rm -rf /*`”的那个人你小心点。”
 
 **“`rm -rf`” 引发的血案都在菜鸟程序员中经常出现，初初入行的前后端们基础不扎实。**
-![](https://user-gold-cdn.xitu.io/2019/11/19/16e82903ad18c22e?w=510&h=389&f=png&s=139565)
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g93jnmaqyij30e60atadk.jpg)
 
 容易出现没有图形用户界面 (`GUI`)就无从下手，连部署应用都不会的尴尬局面。
 
@@ -11,7 +11,7 @@
 而且，连微软都拥抱`Linux terminal`，推出了`Windows Terminal`。你还有 什么理由不学？
 
 
-![](https://user-gold-cdn.xitu.io/2019/11/19/16e81d75e3282abb?w=1024&h=668&f=png&s=919913)
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g93jnkzk5uj30sg0ikayq.jpg)
 
 
 ## 1. `grep`：查找文件中的关键字
@@ -21,7 +21,7 @@ $ grep "string" [选项] file
 ```
 使用`grep`命令查找文件中的所有`React`关键字:
 
-![](https://user-gold-cdn.xitu.io/2019/11/18/16e7ecabcc8568c8?w=890&h=334&f=png&s=158856)
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g93jnpiihlj30oq09a42j.jpg)
 
 
 * `-i`选项可以在文件中不区分大小写地搜索字符串。它匹配"`REACT`"，"`REact`"和"`react`"等词。
@@ -33,11 +33,12 @@ $ grep "string" [选项] file
     $ grep -c "react" index.js
     ```
     
-![](https://user-gold-cdn.xitu.io/2019/11/18/16e7ed01aa5f82d8?w=782&h=190&f=png&s=48454)
+
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g93jnt8n01j30lq05aab3.jpg)
 
 更多的选项可以查看下图：
 
-![](https://user-gold-cdn.xitu.io/2019/11/19/16e8298dfe48b851?w=2014&h=1260&f=jpeg&s=452134)
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g93jnhxm51j30v806sq53.jpg)
 
 ## 2. `ls`：列出当前路径中的文件和目录。
 ```
@@ -48,7 +49,7 @@ $ ls
 * 如果为文件，则显示成蓝色。
 * 如果为文件夹，则显示成灰色
 
-![](https://user-gold-cdn.xitu.io/2019/11/18/16e7ed2ed7ed332e?w=1124&h=244&f=png&s=89922)
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g93jnie4b9j30v806sq53.jpg)
 
 
 ## 3. `pwd`: 显示工作目录
@@ -56,7 +57,7 @@ $ ls
 $ pwd
 ```
 
-![](https://user-gold-cdn.xitu.io/2019/11/18/16e7ed48dcc7a326?w=874&h=178&f=png&s=28544)
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g93jngurv7j30oa04yt97.jpg)
 
 ## 4. `cat`：观看文件的内容
 
@@ -64,20 +65,21 @@ $ pwd
 $ cat somefile.js
 ```
 
-![](https://user-gold-cdn.xitu.io/2019/11/18/16e7ed5f5de5be37?w=1072&h=700&f=png&s=82606)
+![](https://tva1.sinaimg.cn/large/006y8mN6ly1g93jnzrwljj30ts0jgmz4.jpg)
 cat主要有三大功能：
 
 1. 一次显示整个文件。
   ```
  $ cat filename
+  ```
  ```
 2. 从键盘创建一个文件。
-  ```
+ ```
   $ cat > filename
   ```
   **只能创建新文件,不能编辑已有文件。**
 3. 将几个文件合并为一个文件。
-   ```
+  ```
    $cat file1 file2 > file
    ```
    
@@ -86,7 +88,7 @@ cat主要有三大功能：
 
 ## 5. `echo`：字符串的输出
 
-```
+   ```
 $ echo "some text"
 ```
 
@@ -151,7 +153,7 @@ $ tail [选项] somefile
 几个常用的参数:
 
 * `-f`，循环读取。
-  ```
+```
   tail -f notes.log
   ```
   此命令显示 `notes.log` 文件的最后 10 行。当将某些行添加至 `notes.log` 文件时，`tail` 命令会继续显示这些行。 显示一直继续，直到您按下（`Ctrl-C`）组合键停止显示。
@@ -161,13 +163,13 @@ $ tail [选项] somefile
   ```
   显示文件 `notes.log` 的内容，从第 20 行至文件末尾。
 * `-c `，最后xx行。
-   ```
+  ```
    tail -c 10 notes.log
    ```
    显示文件 `notes.log`的最后 10 个字符:
    
 `tail`命令在查看崩溃报告或以前的历史记录日志时很有用:
-```
+   ```
 # tail /var/log/messages
 Mar 20 12:42:22 hameda1d1c dhclient[4334]: DHCPREQUEST on eth0 to 255.255.255.255 port 67 (xid=0x280436dd)
 Mar 20 12:42:24 hameda1d1c avahi-daemon[2027]: Registering new address record for fe80::4639:c4ff:fe53:4908 on eth0.*.
@@ -235,16 +237,16 @@ $ wget someurl
 
 常在写文档时需要列一下文件目录结构，这个时候`tree`命令就能帮个忙了。某些`Linux`、`macOS`上没有`tree`命令，需要执行安装：
 1. 先确保安装了`Homebrew`，若没有则执行：
-   ```
+```
    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
    ```
 2. 安装`tree`命令
-  ```
+   ```
   brew install tree
   ```
 
 效果：
-```
+  ```
 (base) xxx$ tree
 .
 ├── djangoStudy
@@ -318,3 +320,5 @@ $ echo "Hello World" | cat > hello.txt
 也可以来我的`GitHub`博客里拿所有文章的源文件：
 
 **前端劝退指南**：https://github.com/roger-hiro/BlogFN
+
+```

@@ -70,31 +70,31 @@ cat主要有三大功能：
 
 1. 一次显示整个文件。
   ```
- $ cat filename
+  $ cat filename
   ```
- ```
 2. 从键盘创建一个文件。
- ```
+  ```
   $ cat > filename
   ```
   **只能创建新文件,不能编辑已有文件。**
 3. 将几个文件合并为一个文件。
   ```
-   $cat file1 file2 > file
-   ```
-   
+  $cat file1 file2 > file
+  ```
+  
+
 以下例子，将`index.js`拷贝一份为`index2.js`
-![](https://user-gold-cdn.xitu.io/2019/11/18/16e7ed95ad94a766?w=1148&h=778&f=png&s=128196)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g93jtnk4zwj30vw0lmacu.jpg)
 
 ## 5. `echo`：字符串的输出
 
    ```
 $ echo "some text"
-```
+   ```
 
 这是一个内置命令，主要用于Shell脚本和批处理文件中，以将状态文本输出到屏幕或文件。
 
-![](https://user-gold-cdn.xitu.io/2019/11/18/16e7ee2bc9743e5a?w=1044&h=180&f=png&s=31414)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g93jtlptqhj30t0050mxq.jpg)
 
 ## 6. ` touch`：创建文件
 ```
@@ -102,7 +102,7 @@ $ touch somefile
 ```
 `touch`命令用于创建没有任何内容的文件。
 
-![](https://user-gold-cdn.xitu.io/2019/11/18/16e7ee5d32d83e86?w=764&h=200&f=png&s=35838)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g93jtjcszij30l805kwf6.jpg)
 请注意，在上图中，我们用`touch`创建文件和`cat`查看文件内部的。由于新创建的`index2.js`文件为空，因此`cat`不返回任何内容。
 
 以下是`cat`和`touch`之间的主要区别：
@@ -117,7 +117,7 @@ $ mkdir some-directory
 ```
 `mkdir`在当前路径中创建一个新的空目录
 
-![](https://user-gold-cdn.xitu.io/2019/11/18/16e7eec4a7d26682?w=1092&h=364&f=png&s=158891)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g93jthtb79j30uc0a442j.jpg)
 
 
 ## 8.`rm`：删除文件/目录
@@ -126,7 +126,7 @@ $ rm [选项] someFile
 ```
 `rm`命令用于删除一个文件或者目录。
 
-![](https://user-gold-cdn.xitu.io/2019/11/18/16e7eeeec2a21a48?w=1074&h=496&f=png&s=209748)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g93jtg96tmj30tu0dste4.jpg)
 
 选项：
 * `-i` 删除前逐一询问确认。
@@ -140,7 +140,7 @@ $ rmdir some-directory
 
 如果目录中没有内容，该命令将删除目录。否则返回提示`xxx not empty`：
 
-![](https://user-gold-cdn.xitu.io/2019/11/18/16e7ef3888050e11?w=940&h=418&f=png&s=132056)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g93jtd9r22j30q40bmwhs.jpg)
 
 ## 9. `tail`：查看文档的内容
 ```
@@ -148,14 +148,14 @@ $ tail [选项] somefile
 ```
 **默认显示文档的最后 10 行**
 
-![](https://user-gold-cdn.xitu.io/2019/11/18/16e7ef6dfc96f9cf?w=1402&h=892&f=png&s=321982)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g93jtbbww3j312y0osdoa.jpg)
 
 几个常用的参数:
 
 * `-f`，循环读取。
 ```
   tail -f notes.log
-  ```
+```
   此命令显示 `notes.log` 文件的最后 10 行。当将某些行添加至 `notes.log` 文件时，`tail` 命令会继续显示这些行。 显示一直继续，直到您按下（`Ctrl-C`）组合键停止显示。
 * `+`，从xx行到结尾
   ```
@@ -165,9 +165,10 @@ $ tail [选项] somefile
 * `-c `，最后xx行。
   ```
    tail -c 10 notes.log
-   ```
+  ```
    显示文件 `notes.log`的最后 10 个字符:
-   
+  
+
 `tail`命令在查看崩溃报告或以前的历史记录日志时很有用:
    ```
 # tail /var/log/messages
@@ -181,7 +182,7 @@ Mar 20 12:42:30 hameda1d1c avahi-daemon[2027]: Registering new address record fo
 Mar 20 12:42:30 hameda1d1c NET[4385]: /sbin/dhclient-script : updated /etc/resolv.conf
 Mar 20 12:42:30 hameda1d1c dhclient[4334]: bound to 10.76.199.87 -- renewal in 74685 seconds.
 Mar 20 12:45:39 hameda1d1c kernel: usb 3-7: USB disconnect, device number 2
-```
+   ```
 
 
 ## 10. `find`:搜索文件
@@ -191,14 +192,14 @@ $ find path -name filename
 `find`命令可以快速查找文件或目录。当你正在处理具有数百个文件和多个目录的大型项目时，此功能很有用。
 
 查找所有名为`index.js`的文件:
-![](https://user-gold-cdn.xitu.io/2019/11/19/16e7f7c5f2ede87a?w=848&h=900&f=png&s=347652)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g93jt84lb3j30nk0p041i.jpg)
 
 查找指定类型的文件：
 ```
 $ find . -name "*.js"
 ```
 
-![](https://user-gold-cdn.xitu.io/2019/11/19/16e7f7e4685b2130?w=996&h=556&f=png&s=213757)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g93jt4u483j30ro0fgq8g.jpg)
 
 
 ## 11. `mv`：移动文件
@@ -209,7 +210,7 @@ $ mv somefile /to/some/other/path
 
 **支持移动单个文件，多个文件和目录。**
 
-![](https://user-gold-cdn.xitu.io/2019/11/19/16e7f7f971974e8d?w=1180&h=608&f=png&s=278393)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g93jt3jbw2j30ws0gwtfz.jpg)
 ## 12. `wget`：下载文件的工具
 ```
 $ wget someurl
@@ -220,7 +221,7 @@ $ wget someurl
 这是一个非交互式的命令行工具，因此可以很容易地从脚本，CRON作业，不支持`X-Windows`的终端等中调用它。
 
 
-![](https://user-gold-cdn.xitu.io/2019/11/19/16e7f4f47f194606?w=1440&h=1008&f=png&s=635228)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g93jt2h22pj31400s0ar0.jpg)
 
 `Wget`具有许多使检索大型文件或镜像整个Web或FTP站点变得容易的功能，包括：
 
@@ -237,27 +238,27 @@ $ wget someurl
 
 常在写文档时需要列一下文件目录结构，这个时候`tree`命令就能帮个忙了。某些`Linux`、`macOS`上没有`tree`命令，需要执行安装：
 1. 先确保安装了`Homebrew`，若没有则执行：
-```
-   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-   ```
+  ```
+     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  ```
 2. 安装`tree`命令
-   ```
-  brew install tree
+  ```
+ brew install tree
   ```
 
 效果：
   ```
-(base) xxx$ tree
-.
-├── djangoStudy
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-└── manage.py
+  (base) xxx$ tree
+  .
+  ├── djangoStudy
+  │   ├── __init__.py
+  │   ├── settings.py
+  │   ├── urls.py
+  │   └── wsgi.py
+  └── manage.py
 
-1 directory, 5 files
-```
+  1 directory, 5 files
+  ```
 
 ## 14. `|`：管道命令
 
@@ -278,7 +279,7 @@ $ echo $?
 而管道命令则可以衔接各种命令的输出输入，使得连锁操作变得简单。
 > 管道是一种通信机制，通常用于进程间的通信（也可通过socket进行网络通信），它表现出来的形式将前面每一个进程的输出（stdout）直接作为下一个进程的输入（stdin）
 
-![](https://user-gold-cdn.xitu.io/2019/11/19/16e820845bbd0e6f?w=698&h=203&f=png&s=14317)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g93jt053ajj30je05nwel.jpg)
 ```
  $ 指令1 | 指令2 | …
 ```
@@ -304,7 +305,7 @@ $ echo "Hello World" | cat > hello.txt
 > * [MacOS上使用tree命令](https://www.jianshu.com/p/f540e8b6e53f)
 附赠一张强大无比的`Linux`命令表
 
-![](https://user-gold-cdn.xitu.io/2019/11/19/16e829fca12cbc07?w=1680&h=2980&f=png&s=913641)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g93jsvocz9j30u01h87ss.jpg)
 ## ❤️ 看完三件事
 如果你觉得这篇内容对你挺有启发，我想邀请你帮我三个小忙：
 
@@ -315,10 +316,9 @@ $ echo "Hello World" | cat > hello.txt
 * [JavaScript 工具函数大全（新）](https://juejin.im/post/5da1a04ae51d45783d6122bf)
 * [「React Hooks」120行代码实现一个交互完整的拖拽上传组件](https://juejin.im/post/5d674313e51d4561c94b1000)
 * [「React Hooks」160行代码实现动态炫酷的可视化图表 - 排行榜](https://juejin.im/post/5d565015f265da03eb13c575)
-![](https://user-gold-cdn.xitu.io/2019/8/5/16c5faffbefaea2e?w=2006&h=1014&f=png&s=672314)
+![](https://tva1.sinaimg.cn/large/006y8mN6gy1g93jsyyl41j31jq0s6k9c.jpg)
 
 也可以来我的`GitHub`博客里拿所有文章的源文件：
 
 **前端劝退指南**：https://github.com/roger-hiro/BlogFN
 
-```

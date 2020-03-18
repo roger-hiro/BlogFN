@@ -8,7 +8,7 @@
 
 但是，有时在React程序中，需要根据屏幕大小有条件地渲染不同的组件（写媒体查询太麻烦了，还不如另写组件），其实使用`React Hooks`，可以更灵活实现。
 
-![](https://user-gold-cdn.xitu.io/2020/3/13/170d37f461e1e35a?w=500&h=270&f=png&s=82573)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcwdjztyinj30dw07imz4.jpg)
 
 本文的实现来自：
 > [Developing responsive layouts with React Hooks](https://blog.logrocket.com/developing-responsive-layouts-with-react-hooks/)
@@ -31,7 +31,7 @@ const MyComponent = () => {
 
 但是，当调整窗口大小时，未解决宽度值的更新问题，可能会渲染错误的组件。
 
-![](https://user-gold-cdn.xitu.io/2020/3/13/170d356306ea9d53?w=200&h=200&f=png&s=1702109)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcwdk0ya7cj30qm0phkjl.jpg)
 
 ## 2. 方案二：`Hooks`+`resize`
 
@@ -65,7 +65,7 @@ const useViewport = () => {
 }
 ```
 
-![](https://user-gold-cdn.xitu.io/2020/3/13/170d3568ba09d877?w=689&h=548&f=png&s=277703)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcwdk2ykzgj30j50f87bj.jpg)
 
 ## 3. 方案三：构建`useViewport`
 
@@ -94,7 +94,7 @@ const MyComponent = () => {
   return width < breakpoint ? <MobileComponent /> : <DesktopComponent />;
 }
 ```
-![](https://user-gold-cdn.xitu.io/2020/3/13/170d35cbee3ef95e?w=50&h=50&f=png&s=4168)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcwdk645b7j301e01e0sk.jpg)
 
 
 但是这里还有另一个性能问题：
@@ -102,7 +102,7 @@ const MyComponent = () => {
 **响应式布局影响的是多个组件，如果在多处使用`useViewport`，这将浪费性能。**
 
 
-![](https://user-gold-cdn.xitu.io/2020/3/13/170d36293a23fdb8?w=61&h=71&f=png&s=9489)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcwdk92c9pj301p01z749.jpg)
 
 这时就需要另一个`React`亲儿子：`React Context(上下文)` 来帮忙。
 
@@ -161,7 +161,7 @@ const MyComponent = () => {
   return width < breakpoint ? <MobileComponent /> : <DesktopComponent />;
 }
 ```
-![](https://user-gold-cdn.xitu.io/2020/3/13/170d3740e54570b6?w=427&h=413&f=gif&s=81696)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcwdkaw0ysg30bv0bhq4v.gif)
 
 
 ## 后记
@@ -177,7 +177,7 @@ const MyComponent = () => {
 2. 关注公众号「前端劝退师」，不定期分享原创知识。
 3. 也看看其它文章
 
-![](https://user-gold-cdn.xitu.io/2019/11/20/16e86b1de975589f?w=586&h=312&f=png&s=122619)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcwdkekg90j30ga08oq5z.jpg)
 
 劝退师个人微信：**huab119**
 

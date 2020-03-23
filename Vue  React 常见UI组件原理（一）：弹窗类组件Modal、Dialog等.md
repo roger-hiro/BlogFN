@@ -36,6 +36,9 @@
 初初入行时，去各种资源站，找`Jquery`的`UI`组件，想必三四年经验的前端们都曾乐此不疲。
 
 ![](https://tva1.sinaimg.cn/large/00831rSTgy1gd3zi82k16j307n053t8i.jpg)
+
+
+
 这个时代（也就三四年前）的弹窗，因为没有`React`/`Vue`根节点的概念，普遍都是：
 
 1. **直接操作真实 dom，使用熟知的dom 操作方法将指令所在的元素 append 到另外一个 dom 节点上去。** 如：` document.body.appendChild`。
@@ -48,7 +51,10 @@
 ![](https://tva1.sinaimg.cn/large/00831rSTgy1gd3zid2ursj30ka08sds6.jpg)
 随着`React / Vue`先进库的发展，也陆续有了多种方案选择。。。
 
+
+
 ### 1.2 `React / Vue`早期实现。
+
 其实`React / Vue`早期的实现和`Jquery`时代的并无二异：**依赖于父节点数据，在当前组件内挂载弹窗。**
 
 `Vue`的情况稍好，有自定义指令这条路走。
@@ -178,6 +184,8 @@ class Dialog extends React.Component {
 
 ![](https://tva1.sinaimg.cn/large/00831rSTgy1gd3zijfj5dj308b03idhw.jpg)
 
+
+
 前后寻址了三个库/地方，才发现实现的关键：
 
 1. `import Dialog from 'rc-dialog';`
@@ -233,7 +241,8 @@ export default class Portal extends React.Component {
 ```
 
 ![](https://tva1.sinaimg.cn/large/00831rSTgy1gd3zim55nnj302201yjra.jpg)
-`render`里用了`ReactDOM.createPortal`
+
+render`里用了`ReactDOM.createPortal`
 
 **这也是为什么多数`Modal`组件不会提供篡改整体样式的`API`,只能通过全局重置样式。`
 

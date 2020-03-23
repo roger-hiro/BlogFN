@@ -17,7 +17,7 @@
 
 常见的`Modal`模态框、`Dialog`对话框、`Notification`通知框等都是最最常用的交互方式。
 
-![](https://tva1.sinaimg.cn/large/00831rSTgy1gd3zi11hc7j30dd0b4qah.jpg)
+![img](https://tva1.sinaimg.cn/large/00831rSTgy1gd3zlzqfkcj30zk0k0tbw.jpg)
 在我们页面有时需要一些特定的弹窗时，通过改`UI`组件过于麻烦。
 
 这时切图仔级别的会想：简单啊，创建一个`<div/>` 给绝对定位不就得了。

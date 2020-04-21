@@ -6,7 +6,9 @@
 
 ## 1. 全新文档`RFCs`
 
-![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge1zqzd824j31i70u0gpm.jpg)
+!(https://tva1.sinaimg.cn/large/007S8ZIlgy1ge1zqzd824j31i70u0gpm.jpg)
+
+![](https://user-gold-cdn.xitu.io/2020/4/22/1719da838e76e8c7?w=2244&h=1242&f=png&s=158199)
 
 `Vue.js 3.0 Beta`发布后的工作重点是保证稳定性和推进各类库集成
 
@@ -18,7 +20,7 @@
 * `Performance`：性能更比`Vue 2.0`强。
 * `Tree shaking support`：可以将无用模块“剪辑”，仅打包需要的。
 * `Composition API`：组合`API`
-* `Fragment, Teleport, Suspense`：，`Teleport`即`Protal传送门`
+* `Fragment, Teleport, Suspense`：“碎片”，`Teleport`即`Protal传送门`，“悬念”
 * `Better TypeScript support`：更优秀的Ts支持
 * `Custom Renderer API`：暴露了自定义渲染`API`
 
@@ -36,8 +38,118 @@
 
 下面是各项性能对比
 
-
 ![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge1zdapyzwj31hk0u04dz.jpg)
+
+
+
+### 要点1：编译模板的优化
+
+![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge22bv37dhj31k60ladks.jpg)
+
+假设要编译以下代码
+```
+<div>
+  <span/>
+  <span>{{ msg }}</span>
+</div>
+```
+将会被编译成以下模样：
+
+```
+import { createVNode as _createVNode, toDisplayString as _toDisplayString, openBlock as _openBlock, createBlock as _createBlock } from "vue"
+
+export function render(_ctx, _cache) {
+  return (_openBlock(), _createBlock("div", null, [
+    _createVNode("span", null, "static"),
+    _createVNode("span", null, _toDisplayString(_ctx.msg), 1 /* TEXT */)
+  ]))
+}
+
+// Check the console for the AST
+```
+注意看第二个`_createVNode`结尾的“1”：
+
+Vue在运行时会生成`number`（大于0）值的`PatchFlag`，用作标记。
+
+![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge22byzcwaj31k80s011q.jpg)
+仅带有`PatchFlag`标记的节点会被真正追踪，且**无论层级嵌套多深，它的动态节点都直接与`Block`根节点绑定，无需再去遍历静态节点**
+
+再看以下例子：
+
+![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge22c2abk2j31kg0o4n30.jpg)
+```
+<div>
+  <span>static</span>
+  <span :id="hello" class="bar">{{ msg }}   </span>
+</div>
+```
+会被编译成：
+```
+import { createVNode as _createVNode, toDisplayString as _toDisplayString, openBlock as _openBlock, createBlock as _createBlock } from "vue"
+
+export function render(_ctx, _cache) {
+  return (_openBlock(), _createBlock("div", null, [
+    _createVNode("span", null, "static"),
+    _createVNode("span", {
+      id: _ctx.hello,
+      class: "bar"
+    }, _toDisplayString(_ctx.msg), 9 /* TEXT, PROPS */, ["id"])
+  ]))
+}
+```
+`PatchFlag` 变成了`9 /* TEXT, PROPS */, ["id"]`
+
+它会告知我们不光有`TEXT`变化，还有`PROPS`变化（id）
+
+这样既跳出了`virtual dom`性能的瓶颈，又保留了可以手写`render`的灵活性。
+等于是：既有`react`的灵活性，又有基于模板的性能保证。
+
+### 要点2: 事件监听缓存：`cacheHandlers`
+
+![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge22c6ayicj31kg0k8q7w.jpg)
+假设我们要绑定一个事件：
+```
+<div>
+  <span @click="onClick">
+    {{msg}}
+  </span>
+</div>
+```
+关闭`cacheHandlers`后：
+```
+import { toDisplayString as _toDisplayString, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock } from "vue"
+
+export function render(_ctx, _cache) {
+  return (_openBlock(), _createBlock("div", null, [
+    _createVNode("span", { onClick: _ctx.onClick }, _toDisplayString(_ctx.msg), 9 /* TEXT, PROPS */, ["onClick"])
+  ]))
+}
+```
+`onClick`会被视为`PROPS`动态绑定，后续替换点击事件时需要进行更新。
+
+开启`cacheHandlers`后：
+```
+import { toDisplayString as _toDisplayString, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock } from "vue"
+
+export function render(_ctx, _cache) {
+  return (_openBlock(), _createBlock("div", null, [
+    _createVNode("span", {
+      onClick: _cache[1] || (_cache[1] = $event => (_ctx.onClick($event)))
+    }, _toDisplayString(_ctx.msg), 1 /* TEXT */)
+  ]))
+}
+```
+`cache[1]`，会自动生成并缓存一个内联函数，“神奇”的变为一个静态节点。
+Ps：相当于`React`中`useCallback`自动化。
+
+并且支持手写内联函数：
+```
+<div>
+  <span @click="()=>foo()">
+    {{msg}}
+  </span>
+</div>
+```
 
 ## 4. `Tree shaking support`
 ![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge1zsevggvj31he0u0afk.jpg)

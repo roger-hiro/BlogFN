@@ -6,7 +6,7 @@
 
 ## 1. 全新文档`RFCs`
 
-![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge1zd4xrpmj31hc0u0npd.jpg)
+![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge1zqzd824j31i70u0gpm.jpg)
 
 `Vue.js 3.0 Beta`发布后的工作重点是保证稳定性和推进各类库集成
 
@@ -40,7 +40,7 @@
 ![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge1zdapyzwj31hk0u04dz.jpg)
 
 ## 4. `Tree shaking support`
-![](https://user-gold-cdn.xitu.io/2020/4/22/1719db10e9e06382?w=2168&h=1218&f=png&s=213305)
+![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge1zsevggvj31he0u0afk.jpg)
 
 * 可以将无用模块“剪辑”，仅打包需要的（比如`v-model,<transition>`，用不到就不会打包）。
 * 一个简单“`HelloWorld`”大小仅为：13.5kb
@@ -64,7 +64,7 @@
 
 
 感兴趣的可以查看：https://composition-api.vuejs.org/#summary
-![](https://user-gold-cdn.xitu.io/2020/4/22/1719dc20717835c1?w=3350&h=1630&f=png&s=1505450)
+![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge1zt3s5sqj31po0u0e81.jpg)
 
 `Composition API`包含了六个主要`API`
 
@@ -231,7 +231,7 @@ Vue 3 的`<Suspense>`更加轻量：
 2. 关注公众号「前端劝退师」，不定期分享原创知识。
 3. 也看看其它文章
 
-![](https://user-gold-cdn.xitu.io/2020/3/23/171077fdd7945af8?w=1008&h=546&f=png&s=145959)
+![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge1ztq8xd2j30s00f6gpa.jpg)
 
 
 劝退师个人微信：**huab119**

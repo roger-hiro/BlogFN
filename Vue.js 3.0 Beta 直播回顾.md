@@ -6,7 +6,7 @@
 
 ## 1. 全新文档`RFCs`
 
-![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge1zd4xrpmj31hc0u0npd.jpg)
+![](https://user-gold-cdn.xitu.io/2020/4/22/1719da838e76e8c7?w=2244&h=1242&f=png&s=158199)
 
 `Vue.js 3.0 Beta`发布后的工作重点是保证稳定性和推进各类库集成
 
@@ -18,7 +18,7 @@
 * `Performance`：性能更比`Vue 2.0`强。
 * `Tree shaking support`：可以将无用模块“剪辑”，仅打包需要的。
 * `Composition API`：组合`API`
-* `Fragment, Teleport, Suspense`：，`Teleport`即`Protal传送门`
+* `Fragment, Teleport, Suspense`：“碎片”，`Teleport`即`Protal传送门`，“悬念”
 * `Better TypeScript support`：更优秀的Ts支持
 * `Custom Renderer API`：暴露了自定义渲染`API`
 

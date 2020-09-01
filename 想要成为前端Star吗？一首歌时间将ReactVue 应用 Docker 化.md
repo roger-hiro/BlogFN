@@ -39,6 +39,7 @@ CMD ["npm", "start"]
 ```
 
 是的，开发环境在`Docker` 部署，关键配置就那么几行。
+
 ![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/722942f47dcd4e6c85bc452f40de5a77~tplv-k3u1fbpfcp-zoom-1.image)
 
 此外，还需要添加一个`.dockerignore`文件，加快构建过程的速度
@@ -85,6 +86,7 @@ docker run -p 3000:3000 react-docker
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d23d9a1cff9e4cf08eb341f95241418a~tplv-k3u1fbpfcp-zoom-1.image)
 
 在`Docker`的`Dashboard`中也可以看到：
+
 ![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4c7ccae3c64d4e4d9baddec393c0983e~tplv-k3u1fbpfcp-zoom-1.image)
 
 此时打开`http://localhost:3000/`就会看到熟悉又亲切的画面
@@ -121,7 +123,9 @@ services:
 docker-compose up -d --build
 ```
 ![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/42781692c3444fb79b73223076120f5c~tplv-k3u1fbpfcp-zoom-1.image)
+
 就能看到一样构建了：
+
 ![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a586e65efb73416089f8441892e27b43~tplv-k3u1fbpfcp-zoom-1.image)
 
 
@@ -224,7 +228,10 @@ docker-compose -f docker-compose.prod.yml up -d --build
 
 本文弱化了命令行参数，希望能让广大萌新们能先看懂，再去演练一番，举一反三，不再怕`Docker`，然后再去学习`k8s`相关。
 
+
+
 ![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/35da081230aa4fe6996063c8f6d6790d~tplv-k3u1fbpfcp-zoom-1.image)
+
 `Docker` 在接下来的几年里，会逐渐成为开发的标配，希望大家能放下对运维领域的偏见，多多学习这些行业内的新标准与概念。
 
 

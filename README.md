@@ -25,5 +25,5 @@
 ### 公众号
 
 ![](https://user-gold-cdn.xitu.io/2019/8/5/16c5faffbefaea2e?w=2006&h=1014&f=png&s=672314)
-![Cloud Studio Template](https://cs-res.codehub.cn/common/assets/icon-badge.svg)](https://www.baidu.com)
+[![Cloud Studio Template](https://cs-res.codehub.cn/common/assets/icon-badge.svg)](https://www.baidu.com)
 
